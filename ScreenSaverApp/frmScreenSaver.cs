@@ -75,6 +75,25 @@ namespace ScreenSaverApp
 
             // Make text smaller
             label1.Font = new System.Drawing.Font("Arial", 6);
+            label2.Font = new System.Drawing.Font("Arial", 6);
+            label3.Font = new System.Drawing.Font("Arial", 6);
+            label4.Font = new System.Drawing.Font("Arial", 6);
+            label5.Font = new System.Drawing.Font("Arial", 6);
+
+            label1.Location = new Point(2, 5);
+            label2.Location = new Point(80, label1.Location.Y + 23);
+            label3.Location = new Point(25, label2.Location.Y + 23);
+            label4.Location = new Point(80, label3.Location.Y + 23);
+            label5.Location = new Point(2, label4.Location.Y + 23);
+
+            pictureBox1.Size = 
+                new Size(pictureBox1.Size.Width/2, pictureBox1.Size.Height/2);
+            pictureBox2.Size = 
+                new Size(pictureBox2.Size.Width/4, pictureBox2.Size.Height);
+            pictureBox1.Location = 
+                new Point(Size.Width - pictureBox1.Size.Width - 3,
+                    Size.Height - pictureBox1.Size.Height - 3
+                );
 
             previewMode = true;
         }

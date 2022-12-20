@@ -47,11 +47,12 @@
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Arial", 26F);
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(12, 24);
+            this.label1.Location = new System.Drawing.Point(3, 24);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(198, 40);
             this.label1.TabIndex = 1;
             this.label1.Text = "People First";
+            this.label1.Visible = false;
             // 
             // pictureBox1
             // 
@@ -88,6 +89,7 @@
             this.label2.Size = new System.Drawing.Size(288, 40);
             this.label2.TabIndex = 1;
             this.label2.Text = "Stronger Together";
+            this.label2.Visible = false;
             // 
             // label3
             // 
@@ -101,6 +103,7 @@
             this.label3.Size = new System.Drawing.Size(499, 40);
             this.label3.TabIndex = 1;
             this.label3.Text = "Do what\'s right, not what\'s easy";
+            this.label3.Visible = false;
             // 
             // label4
             // 
@@ -109,11 +112,12 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Font = new System.Drawing.Font("Arial", 26F);
             this.label4.ForeColor = System.Drawing.Color.White;
-            this.label4.Location = new System.Drawing.Point(3, 276);
+            this.label4.Location = new System.Drawing.Point(3, 296);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(209, 40);
             this.label4.TabIndex = 1;
             this.label4.Text = "Be Authentic";
+            this.label4.Visible = false;
             // 
             // label5
             // 
@@ -127,6 +131,7 @@
             this.label5.Size = new System.Drawing.Size(239, 40);
             this.label5.TabIndex = 1;
             this.label5.Text = "Always Deliver";
+            this.label5.Visible = false;
             // 
             // frmScreenSaver
             // 

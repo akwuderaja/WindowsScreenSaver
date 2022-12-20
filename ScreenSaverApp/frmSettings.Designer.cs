@@ -36,6 +36,10 @@
             this.txtTextToDisplay3 = new System.Windows.Forms.TextBox();
             this.txtTextToDisplay4 = new System.Windows.Forms.TextBox();
             this.txtTextToDisplay5 = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnCancel
@@ -43,7 +47,7 @@
             this.btnCancel.CausesValidation = false;
             this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnCancel.Location = new System.Drawing.Point(153, 194);
+            this.btnCancel.Location = new System.Drawing.Point(148, 276);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(102, 29);
             this.btnCancel.TabIndex = 11;
@@ -55,7 +59,7 @@
             // 
             this.btnOk.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btnOk.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.btnOk.Location = new System.Drawing.Point(38, 194);
+            this.btnOk.Location = new System.Drawing.Point(33, 276);
             this.btnOk.Name = "btnOk";
             this.btnOk.Size = new System.Drawing.Size(102, 29);
             this.btnOk.TabIndex = 10;
@@ -67,56 +71,96 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.label3.Location = new System.Drawing.Point(39, 71);
+            this.label3.Location = new System.Drawing.Point(34, 16);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(103, 17);
+            this.label3.Size = new System.Drawing.Size(115, 17);
             this.label3.TabIndex = 9;
-            this.label3.Text = "Text to display:";
+            this.label3.Text = "Text to display 1:";
             // 
-            // txtTextToDisplay
+            // txtTextToDisplay1
             // 
             this.txtTextToDisplay1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTextToDisplay1.Location = new System.Drawing.Point(38, 91);
+            this.txtTextToDisplay1.Location = new System.Drawing.Point(33, 36);
             this.txtTextToDisplay1.Name = "txtTextToDisplay1";
             this.txtTextToDisplay1.Size = new System.Drawing.Size(217, 23);
             this.txtTextToDisplay1.TabIndex = 6;
             this.txtTextToDisplay1.Text = "People First";
             // 
-            // txtTextToDisplay
+            // txtTextToDisplay2
             // 
             this.txtTextToDisplay2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTextToDisplay2.Location = new System.Drawing.Point(38, 111);
+            this.txtTextToDisplay2.Location = new System.Drawing.Point(33, 88);
             this.txtTextToDisplay2.Name = "txtTextToDisplay2";
             this.txtTextToDisplay2.Size = new System.Drawing.Size(217, 23);
             this.txtTextToDisplay2.TabIndex = 6;
-            this.txtTextToDisplay1.Text = "Stronger Together";
+            this.txtTextToDisplay2.Text = "Stronger Together";
             // 
-            // txtTextToDisplay
+            // txtTextToDisplay3
             // 
             this.txtTextToDisplay3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTextToDisplay3.Location = new System.Drawing.Point(38, 131);
+            this.txtTextToDisplay3.Location = new System.Drawing.Point(33, 138);
             this.txtTextToDisplay3.Name = "txtTextToDisplay3";
             this.txtTextToDisplay3.Size = new System.Drawing.Size(217, 23);
             this.txtTextToDisplay3.TabIndex = 6;
-            this.txtTextToDisplay1.Text = "Do what\'s right, not what\'s easy";
+            this.txtTextToDisplay3.Text = "Do what\'s right, not what\'s easy";
             // 
-            // txtTextToDisplay
+            // txtTextToDisplay4
             // 
             this.txtTextToDisplay4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTextToDisplay4.Location = new System.Drawing.Point(38, 151);
+            this.txtTextToDisplay4.Location = new System.Drawing.Point(33, 189);
             this.txtTextToDisplay4.Name = "txtTextToDisplay4";
             this.txtTextToDisplay4.Size = new System.Drawing.Size(217, 23);
             this.txtTextToDisplay4.TabIndex = 6;
-            this.txtTextToDisplay1.Text = "Be Authentic";
+            this.txtTextToDisplay4.Text = "Be Authentic";
             // 
-            // txtTextToDisplay
+            // txtTextToDisplay5
             // 
             this.txtTextToDisplay5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.txtTextToDisplay5.Location = new System.Drawing.Point(38, 171);
+            this.txtTextToDisplay5.Location = new System.Drawing.Point(33, 241);
             this.txtTextToDisplay5.Name = "txtTextToDisplay5";
             this.txtTextToDisplay5.Size = new System.Drawing.Size(217, 23);
             this.txtTextToDisplay5.TabIndex = 6;
-            this.txtTextToDisplay1.Text = "Always Deliver";
+            this.txtTextToDisplay5.Text = "Always Deliver";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label1.Location = new System.Drawing.Point(34, 68);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(115, 17);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Text to display 2:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label2.Location = new System.Drawing.Point(34, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(115, 17);
+            this.label2.TabIndex = 9;
+            this.label2.Text = "Text to display 3:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label4.Location = new System.Drawing.Point(30, 169);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(115, 17);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Text to display 4:";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label5.Location = new System.Drawing.Point(32, 221);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(115, 17);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Text to display 5:";
             // 
             // frmSettings
             // 
@@ -124,9 +168,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(278, 244);
+            this.ClientSize = new System.Drawing.Size(278, 328);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnOk);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.txtTextToDisplay1);
             this.Controls.Add(this.txtTextToDisplay2);
@@ -150,6 +198,10 @@
         private System.Windows.Forms.TextBox txtTextToDisplay3;
         private System.Windows.Forms.TextBox txtTextToDisplay4;
         private System.Windows.Forms.TextBox txtTextToDisplay5;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 
