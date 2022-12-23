@@ -15,6 +15,7 @@ namespace ScreenSaverApp
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new frmSettings());
 
             if (args.Length > 0)
             {
@@ -30,7 +31,7 @@ namespace ScreenSaverApp
                 }
                 else if (args.Length > 1)
                     secondArgument = args[1];
-
+                
                 if (firstArgument == "/c")           // Configuration mode
                 {
                     Application.Run(new frmSettings());
@@ -43,7 +44,7 @@ namespace ScreenSaverApp
                             "ScreenSaver", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                         return;
                     }
-
+                    
                     IntPtr previewWndHandle = new IntPtr(long.Parse(secondArgument));
                     Application.Run(new frmScreenSaver(previewWndHandle));
                 }
@@ -51,7 +52,7 @@ namespace ScreenSaverApp
                 {
                     ShowScreenSaver();
                     Application.Run();
-                }
+                }  
                 else    // Undefined argument
                 {
                     MessageBox.Show("Sorry, but the command line argument \"" + firstArgument +
@@ -62,7 +63,7 @@ namespace ScreenSaverApp
             else    // No arguments - treat like /c
             {
                 Application.Run(new frmSettings());
-            }
+            }            
         }
 
         /// <summary>
@@ -74,20 +75,7 @@ namespace ScreenSaverApp
             {
                 frmScreenSaver screensaver = new frmScreenSaver(screen.Bounds);
                 screensaver.Show();
-            }
+            }           
         }
     }
-    //static class Program
-    //{
-    //    /// <summary>
-    //    /// The main entry point for the application.
-    //    /// </summary>
-    //    [STAThread]
-    //    static void Main()
-    //    {
-    //        Application.EnableVisualStyles();
-    //        Application.SetCompatibleTextRenderingDefault(false);
-    //        Application.Run(new Form1());
-    //    }
-    //}
 }

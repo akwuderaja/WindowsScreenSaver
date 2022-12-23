@@ -1,13 +1,13 @@
-﻿using Microsoft.Win32;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using System.Runtime.InteropServices;
+using Microsoft.Win32;
 
 namespace ScreenSaverApp
 {
@@ -29,37 +29,26 @@ namespace ScreenSaverApp
 
         #endregion
 
-        public frmScreenSaver()
-        {
-            InitializeComponent();
-            AssignEvents();
-        }
-
-        private void AssignEvents()
-        {
-            this.MouseMove += frmScreenSaver_MouseMove;
-            this.MouseClick += frmScreenSaver_MouseClick;
-            this.KeyPress += frmScreenSaver_KeyPress;
-            // moveTimer.Tick += moveTimer_Tick;
-            this.Load += frmScreenSaver_Load;
-        }
 
         private Point mouseLocation;
         private bool previewMode = false;
         private Random rand = new Random();
         private int counter = 0;
-        
+
+        public frmScreenSaver()
+        {
+            InitializeComponent();
+        }
+
         public frmScreenSaver(Rectangle Bounds)
         {
             InitializeComponent();
             this.Bounds = Bounds;
-            AssignEvents();
         }
 
         public frmScreenSaver(IntPtr PreviewWndHandle)
         {
             InitializeComponent();
-            AssignEvents();
 
             // Set the preview window as the parent of this window
             SetParent(this.Handle, PreviewWndHandle);
@@ -74,23 +63,24 @@ namespace ScreenSaverApp
             Location = new Point(0, 0);
 
             // Make text smaller
-            label1.Font = new System.Drawing.Font("Arial", 6);
-            label2.Font = new System.Drawing.Font("Arial", 6);
-            label3.Font = new System.Drawing.Font("Arial", 6);
-            label4.Font = new System.Drawing.Font("Arial", 6);
-            label5.Font = new System.Drawing.Font("Arial", 6);
+            Font ft = new System.Drawing.Font("Arial", 6);
+            label1.Font = ft;
+            label2.Font = ft;
+            label3.Font = ft;
+            label4.Font = ft;
+            label5.Font = ft;
 
-            label1.Location = new Point(2, 5);
-            label2.Location = new Point(80, label1.Location.Y + 23);
-            label3.Location = new Point(25, label2.Location.Y + 23);
-            label4.Location = new Point(80, label3.Location.Y + 23);
-            label5.Location = new Point(2, label4.Location.Y + 23);
+            label1.Location = new Point(this.Bounds.X + 2, this.Bounds.Y + 5);
+            label2.Location = new Point(this.Bounds.X + 80, label1.Location.Y + 23);
+            label3.Location = new Point(this.Bounds.X + 25, label2.Location.Y + 23);
+            label4.Location = new Point(this.Bounds.X + 80, label3.Location.Y + 23);
+            label5.Location = new Point(this.Bounds.X + 2, label4.Location.Y + 23);
 
-            pictureBox1.Size = 
-                new Size(pictureBox1.Size.Width/2, pictureBox1.Size.Height/2);
-            pictureBox2.Size = 
-                new Size(pictureBox2.Size.Width/4, pictureBox2.Size.Height);
-            pictureBox1.Location = 
+            pictureBox1.Size =
+                new Size(pictureBox1.Size.Width / 2, pictureBox1.Size.Height / 2);
+            panel1.Size =
+                new Size(panel1.Size.Width / 4, panel1.Size.Height);
+            pictureBox1.Location =
                 new Point(Size.Width - pictureBox1.Size.Width - 3,
                     Size.Height - pictureBox1.Size.Height - 3
                 );
@@ -99,42 +89,83 @@ namespace ScreenSaverApp
         }
 
         private void frmScreenSaver_Load(object sender, EventArgs e)
-        {
+        {            
             LoadSettings();
 
-            Cursor.Hide();
+            Cursor.Hide();            
             TopMost = true;
 
             moveTimer.Interval = 1000;
             moveTimer.Tick += new EventHandler(moveTimer_Tick);
             moveTimer.Start();
-        }
 
+            foreach (Control item in Controls)
+            {
+                if (typeof(Label)==item.GetType())
+                {
+                    try
+                    {
+                        TransparetBackground(item);
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }            
+        }
+        void TransparetBackground(Control C)
+        {
+            C.Visible = false;
+
+            C.Refresh();
+            Application.DoEvents();
+
+            Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
+            int titleHeight = screenRectangle.Top - this.Top;
+            int Right = screenRectangle.Left - this.Left;
+
+            Bitmap bmp = new Bitmap(this.Width, this.Height);
+            this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
+            Bitmap bmpImage = new Bitmap(bmp);
+            bmp = bmpImage.Clone(new Rectangle(C.Location.X + Right, C.Location.Y + titleHeight, C.Width, C.Height), bmpImage.PixelFormat);
+            C.BackgroundImage = bmp;
+
+            C.Visible = true;
+        }
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
-            if(counter >= 5){
-                counter=0;
+            // Move text to new location
+            if (counter >= 5)
+            {
+                counter = 0;
                 label1.Visible = false;
                 label2.Visible = false;
                 label3.Visible = false;
                 label4.Visible = false;
                 label5.Visible = false;
-            }else if(counter == 0){
+            }
+            else if (counter == 0)
+            {
                 counter++;
                 label1.Visible = true;
-            }else if(counter == 1){
+            }
+            else if (counter == 1)
+            {
                 counter++;
                 label2.Visible = true;
             }
-            else if(counter == 2){
+            else if (counter == 2)
+            {
                 counter++;
                 label3.Visible = true;
             }
-            else if(counter == 3){
+            else if (counter == 3)
+            {
                 counter++;
                 label4.Visible = true;
             }
-            else if(counter == 4){
+            else if (counter == 4)
+            {
                 counter++;
                 label5.Visible = true;
             }
@@ -144,12 +175,38 @@ namespace ScreenSaverApp
         {
             // Use the string from the Registry if it exists
             RegistryKey key = Registry.CurrentUser.OpenSubKey(Statics.RegisteryPath);
-            if (key != null){
-                label1.Text = (string)key.GetValue("text1");
-                label2.Text = (string)key.GetValue("text2");
-                label3.Text = (string)key.GetValue("text3");
-                label4.Text = (string)key.GetValue("text4");
-                label5.Text = (string)key.GetValue("text5");
+            if (key != null)
+            {
+                try
+                {
+                    label1.Text = (string)key.GetValue("text1");
+                    label2.Text = (string)key.GetValue("text2");
+                    label3.Text = (string)key.GetValue("text3");
+                    label4.Text = (string)key.GetValue("text4");
+                    label5.Text = (string)key.GetValue("text5");
+
+                    ForeColor = Color.FromArgb(int.Parse(key.GetValue("FontColor").ToString()));
+                    BackColor = Color.FromArgb(int.Parse(key.GetValue("BackColor").ToString()));
+                    string[] str = key.GetValue("fontsize").ToString().Split(Convert.ToChar(","));
+                    Font ft = new Font(str[1], Convert.ToInt32(str[2]),
+                        str[0] == "False" ? FontStyle.Regular : FontStyle.Bold);
+
+                    label1.ForeColor = ForeColor;
+                    label2.ForeColor = ForeColor;
+                    label3.ForeColor = ForeColor;
+                    label4.ForeColor = ForeColor;
+                    label5.ForeColor = ForeColor;
+
+                    label1.Font = ft;
+                    label2.Font = ft;
+                    label3.Font = ft;
+                    label4.Font = ft;
+                    label5.Font = ft;
+                }
+                catch (Exception)// ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
             }
         }
 
