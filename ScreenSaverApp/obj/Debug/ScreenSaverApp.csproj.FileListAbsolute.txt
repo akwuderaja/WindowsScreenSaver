@@ -18,4 +18,4 @@ C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverA
 C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.pdb
 C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.exe
 C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.pdb
-C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csprojAssemblyReference.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.AssemblyReference.cache

@@ -38,6 +38,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.timerTransparent = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -74,7 +75,7 @@
             this.label2.ForeColor = System.Drawing.Color.White;
             this.label2.Location = new System.Drawing.Point(12, 71);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(776, 35);
+            this.label2.Size = new System.Drawing.Size(776, 54);
             this.label2.TabIndex = 1;
             this.label2.Text = "Stronger Together";
             this.label2.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -88,7 +89,7 @@
             this.label3.ForeColor = System.Drawing.Color.White;
             this.label3.Location = new System.Drawing.Point(12, 151);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(776, 35);
+            this.label3.Size = new System.Drawing.Size(776, 54);
             this.label3.TabIndex = 1;
             this.label3.Text = "Do what\'s right, not what\'s easy";
             this.label3.TextAlign = System.Drawing.ContentAlignment.TopCenter;
@@ -115,9 +116,9 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Font = new System.Drawing.Font("Arial", 18F);
             this.label5.ForeColor = System.Drawing.Color.White;
-            this.label5.Location = new System.Drawing.Point(12, 239);
+            this.label5.Location = new System.Drawing.Point(12, 234);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(776, 35);
+            this.label5.Size = new System.Drawing.Size(776, 54);
             this.label5.TabIndex = 1;
             this.label5.Text = "Always Deliver";
             this.label5.TextAlign = System.Drawing.ContentAlignment.TopRight;
@@ -128,12 +129,18 @@
             this.panel1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.panel1.BackColor = System.Drawing.Color.Transparent;
-            this.panel1.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("panel1.BackgroundImage")));
+            this.panel1.BackgroundImage = global::ScreenSaverApp.Properties.Resources.design;
             this.panel1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.panel1.Location = new System.Drawing.Point(3, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(239, 340);
+            this.panel1.Size = new System.Drawing.Size(557, 340);
             this.panel1.TabIndex = 3;
+            this.panel1.Visible = false;
+            // 
+            // timerTransparent
+            // 
+            this.timerTransparent.Interval = 300;
+            this.timerTransparent.Tick += new System.EventHandler(this.timerTransparent_Tick);
             // 
             // frmScreenSaver
             // 
@@ -155,6 +162,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Screen Saver";
             this.Load += new System.EventHandler(this.frmScreenSaver_Load);
+            this.SizeChanged += new System.EventHandler(this.frmScreenSaver_SizeChanged);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.frmScreenSaver_KeyPress);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.frmScreenSaver_MouseClick);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.frmScreenSaver_MouseMove);
@@ -174,6 +182,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Timer timerTransparent;
     }
 }
 

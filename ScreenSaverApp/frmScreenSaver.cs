@@ -8,6 +8,11 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
+using ScreenSaverApp.Properties;
+using System.Resources;
+using System.Threading;
 
 namespace ScreenSaverApp
 {
@@ -33,7 +38,10 @@ namespace ScreenSaverApp
         private Point mouseLocation;
         private bool previewMode = false;
         private Random rand = new Random();
-        private int counter = 0;
+        private int counter = 0, counterTrans = 0;
+        int A = 0, R = 0, G = 0, B = 0;
+        Font font;
+        List<Label> lbls = new List<Label>();
 
         public frmScreenSaver()
         {
@@ -93,25 +101,18 @@ namespace ScreenSaverApp
             LoadSettings();
 
             Cursor.Hide();            
-            TopMost = true;
+            //TopMost = true;
 
-            moveTimer.Interval = 1000;
+            moveTimer.Interval = 500;
             moveTimer.Tick += new EventHandler(moveTimer_Tick);
             moveTimer.Start();
 
-            foreach (Control item in Controls)
-            {
-                if (typeof(Label)==item.GetType())
-                {
-                    try
-                    {
-                        TransparetBackground(item);
-                    }
-                    catch (Exception)
-                    {
-                    }
-                }
-            }            
+            lbls.Add(label1);
+            lbls.Add(label2);
+            lbls.Add(label3);
+            lbls.Add(label4);
+            lbls.Add(label5);
+        
         }
         void TransparetBackground(Control C)
         {
@@ -130,7 +131,7 @@ namespace ScreenSaverApp
             bmp = bmpImage.Clone(new Rectangle(C.Location.X + Right, C.Location.Y + titleHeight, C.Width, C.Height), bmpImage.PixelFormat);
             C.BackgroundImage = bmp;
 
-            C.Visible = true;
+            //C.Visible = true;
         }
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
@@ -143,34 +144,84 @@ namespace ScreenSaverApp
                 label3.Visible = false;
                 label4.Visible = false;
                 label5.Visible = false;
+                panel1.Visible = false;
+                moveTimer.Interval = 500;
+                //panel1.BackgroundImage= null;
+                timerTransparent.Stop(); 
             }
-            else if (counter == 0)
+            else
             {
-                counter++;
-                label1.Visible = true;
-            }
-            else if (counter == 1)
-            {
-                counter++;
-                label2.Visible = true;
-            }
-            else if (counter == 2)
-            {
-                counter++;
-                label3.Visible = true;
-            }
-            else if (counter == 3)
-            {
-                counter++;
-                label4.Visible = true;
-            }
-            else if (counter == 4)
-            {
-                counter++;
-                label5.Visible = true;
+                moveTimer.Interval = 3000;
+                counterTrans = 0;
+                panel1.Visible = true;
+                if (counter==0)
+                {
+                    foreach (Control item in Controls)
+                    {
+                        if (typeof(Label) == item.GetType())
+                        {
+                            try
+                            {
+                                TransparetBackground(item);
+                                //item.Visible = false;
+                            }
+                            catch (Exception)
+                            {
+                            }
+                        }
+                    }
+                }
+                Thread.Sleep(100);
+                timerTransparent.Start(); 
             }
         }
 
+        private void timerTransparent_Tick(object sender, EventArgs e)
+        {
+            if (counter >= 5)
+                return;
+            var c = lbls[counter].ForeColor;
+            if (counterTrans == 0)
+            {
+                A = c.A;
+                R = c.R;
+                G = c.G;
+                B = c.B;
+
+                Color c2 = Color.FromArgb(A,
+                    (int)(R/4), (int)(G/4), (int)(B /4));
+                    //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
+                //lbls[counter].ForeColor = c2;
+                lbls[counter].Font = new Font(font.Name, font.Size/1.5f, font.Style);
+                lbls[counter].Visible = true;
+                counterTrans++;
+            }
+            else if (counterTrans == 1)
+            {
+                Color c2 = Color.FromArgb(A,
+                    (int)(R / 3), (int)(G / 3), (int)(B / 3));
+                //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
+                //lbls[counter].ForeColor = c2;
+                lbls[counter].Font = new Font(font.Name, font.Size / 1.3f, font.Style);
+                counterTrans++;
+            }
+            else if (counterTrans == 2)
+            {
+                Color c2 = Color.FromArgb(A,
+                    (int)(R/2), (int)(G/2), (int)(B /2));
+                //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
+                //lbls[counter].ForeColor = c2;
+                lbls[counter].Font = new Font(font.Name, font.Size / 1.1f, font.Style);
+                counterTrans++;
+            }
+            else if (counterTrans == 3)
+            {
+                lbls[counter].ForeColor = ForeColor;
+                lbls[counter].Font = font;
+                counterTrans = 0;
+                counter++; timerTransparent.Stop();
+            }
+        }
         private void LoadSettings()
         {
             // Use the string from the Registry if it exists
@@ -188,7 +239,13 @@ namespace ScreenSaverApp
                     ForeColor = Color.FromArgb(int.Parse(key.GetValue("FontColor").ToString()));
                     BackColor = Color.FromArgb(int.Parse(key.GetValue("BackColor").ToString()));
                     string[] str = key.GetValue("fontsize").ToString().Split(Convert.ToChar(","));
-                    Font ft = new Font(str[1], Convert.ToInt32(str[2]),
+
+
+                    float fontSize = (float)Convert.ToDouble(str[2]);
+                    fontSize = (Bounds.Width / 800) * fontSize; //12;
+                    if (fontSize < 10) fontSize = 10;
+
+                    font = new Font(str[1], fontSize,
                         str[0] == "False" ? FontStyle.Regular : FontStyle.Bold);
 
                     label1.ForeColor = ForeColor;
@@ -197,11 +254,11 @@ namespace ScreenSaverApp
                     label4.ForeColor = ForeColor;
                     label5.ForeColor = ForeColor;
 
-                    label1.Font = ft;
-                    label2.Font = ft;
-                    label3.Font = ft;
-                    label4.Font = ft;
-                    label5.Font = ft;
+                    label1.Font = font;
+                    label2.Font = font;
+                    label3.Font = font;
+                    label4.Font = font;
+                    label5.Font = font;
                 }
                 catch (Exception)// ex)
                 {
@@ -238,5 +295,21 @@ namespace ScreenSaverApp
             if (!previewMode)
                 Application.Exit();
         }
+
+        //private int _lastFormSize;
+        private void frmScreenSaver_SizeChanged(object sender, EventArgs e)
+        {
+            //var bigger = GetArea(this.Size) > _lastFormSize;
+            //float scaleFactor = bigger ? 1.1f : 0.9f;
+            //label1.Font = new Font(label1.Font.FontFamily.Name, label1.Font.Size * scaleFactor);
+
+            //_lastFormSize = GetArea(this.Size);
+        }
+
+
+        //private int GetArea(Size size)
+        //{
+        //    return size.Height * size.Width;
+        //}
     }
 }
