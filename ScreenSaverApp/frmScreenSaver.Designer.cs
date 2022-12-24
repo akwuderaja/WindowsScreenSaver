@@ -139,7 +139,7 @@
             // 
             // timerTransparent
             // 
-            this.timerTransparent.Interval = 300;
+            this.timerTransparent.Interval = 200;
             this.timerTransparent.Tick += new System.EventHandler(this.timerTransparent_Tick);
             // 
             // frmScreenSaver

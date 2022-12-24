@@ -101,7 +101,7 @@ namespace ScreenSaverApp
             LoadSettings();
 
             Cursor.Hide();            
-            //TopMost = true;
+            TopMost = true;
 
             moveTimer.Interval = 500;
             moveTimer.Tick += new EventHandler(moveTimer_Tick);
@@ -136,20 +136,7 @@ namespace ScreenSaverApp
         private void moveTimer_Tick(object sender, System.EventArgs e)
         {
             // Move text to new location
-            if (counter >= 5)
-            {
-                counter = 0;
-                label1.Visible = false;
-                label2.Visible = false;
-                label3.Visible = false;
-                label4.Visible = false;
-                label5.Visible = false;
-                panel1.Visible = false;
-                moveTimer.Interval = 500;
-                //panel1.BackgroundImage= null;
-                timerTransparent.Stop(); 
-            }
-            else
+            if (counter <= 5 && timerTransparent.Enabled == false)
             {
                 moveTimer.Interval = 3000;
                 counterTrans = 0;
@@ -172,54 +159,100 @@ namespace ScreenSaverApp
                     }
                 }
                 Thread.Sleep(100);
+                timerTransparent.Enabled = true;
                 timerTransparent.Start(); 
             }
         }
 
         private void timerTransparent_Tick(object sender, EventArgs e)
         {
-            if (counter >= 5)
-                return;
-            var c = lbls[counter].ForeColor;
-            if (counterTrans == 0)
+            if (counter <= 4)
             {
-                A = c.A;
-                R = c.R;
-                G = c.G;
-                B = c.B;
+                var c = lbls[counter].ForeColor;
+                if (counterTrans == 0)
+                {
+                    A = c.A;
+                    R = c.R;
+                    G = c.G;
+                    B = c.B;
 
-                Color c2 = Color.FromArgb(A,
-                    (int)(R/4), (int)(G/4), (int)(B /4));
+                    Color c2 = Color.FromArgb(A,
+                        (int)(R / 4), (int)(G / 4), (int)(B / 4));
                     //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
-                //lbls[counter].ForeColor = c2;
-                lbls[counter].Font = new Font(font.Name, font.Size/1.5f, font.Style);
-                lbls[counter].Visible = true;
-                counterTrans++;
+                    //lbls[counter].ForeColor = c2;
+                    lbls[counter].Font = new Font(font.Name, font.Size / 1.5f, font.Style);
+                    lbls[counter].Visible = true;
+                    counterTrans++;
+                }
+                else if (counterTrans == 1)
+                {
+                    Color c2 = Color.FromArgb(A,
+                        (int)(R / 3), (int)(G / 3), (int)(B / 3));
+                    lbls[counter].Font = new Font(font.Name, font.Size / 1.4f, font.Style);
+                    counterTrans++;
+                }
+                else if (counterTrans == 2)
+                {
+                    Color c2 = Color.FromArgb(A,
+                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
+                    lbls[counter].Font = new Font(font.Name, font.Size / 1.3f, font.Style);
+                    counterTrans++;
+                }
+                else if (counterTrans == 3)
+                {
+                    Color c2 = Color.FromArgb(A,
+                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
+                    lbls[counter].Font = new Font(font.Name, font.Size / 1.2f, font.Style);
+                    counterTrans++;
+                }
+                else if (counterTrans == 4)
+                {
+                    Color c2 = Color.FromArgb(A,
+                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
+                    lbls[counter].Font = new Font(font.Name, font.Size / 1.1f, font.Style);
+                    counterTrans++;
+                }
+                else if (counterTrans == 5)
+                {
+                    lbls[counter].ForeColor = ForeColor;
+                    lbls[counter].Font = font;
+                    counterTrans = 0;
+                    counter++; 
+                }
             }
-            else if (counterTrans == 1)
+            else
             {
-                Color c2 = Color.FromArgb(A,
-                    (int)(R / 3), (int)(G / 3), (int)(B / 3));
-                //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
-                //lbls[counter].ForeColor = c2;
-                lbls[counter].Font = new Font(font.Name, font.Size / 1.3f, font.Style);
-                counterTrans++;
-            }
-            else if (counterTrans == 2)
-            {
-                Color c2 = Color.FromArgb(A,
-                    (int)(R/2), (int)(G/2), (int)(B /2));
-                //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
-                //lbls[counter].ForeColor = c2;
-                lbls[counter].Font = new Font(font.Name, font.Size / 1.1f, font.Style);
-                counterTrans++;
-            }
-            else if (counterTrans == 3)
-            {
-                lbls[counter].ForeColor = ForeColor;
-                lbls[counter].Font = font;
-                counterTrans = 0;
-                counter++; timerTransparent.Stop();
+                float val = 0f;
+                if (counter == 5)
+                    val = 1.1f;
+                else if (counter == 6)
+                    val = 1.2f;
+                else if (counter == 7)
+                    val = 1.3f;
+                else if (counter == 8)
+                    val = 1.4f;
+                else if (counter == 9)
+                    val = 1.5f;
+                else if (counter == 10)
+                {
+                    counter = 0;
+                    label1.Visible = false;
+                    label2.Visible = false;
+                    label3.Visible = false;
+                    label4.Visible = false;
+                    label5.Visible = false;
+                    panel1.Visible = false;
+                    moveTimer.Interval = 500;
+                    timerTransparent.Stop();
+                    timerTransparent.Enabled = false;
+                    return;
+                }
+
+                foreach (Control item in Controls)
+                    if (typeof(Label) == item.GetType())
+                        item.Font = new Font(font.Name, font.Size / val, font.Style);
+
+                counter++;
             }
         }
         private void LoadSettings()
