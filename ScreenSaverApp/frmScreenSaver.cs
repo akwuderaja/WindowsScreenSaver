@@ -139,6 +139,7 @@ namespace ScreenSaverApp
             if (counter <= 5 && timerTransparent.Enabled == false)
             {
                 moveTimer.Interval = 3000;
+                timerTransparent.Interval = 1;
                 counterTrans = 0;
                 panel1.Visible = true;
                 if (counter==0)
@@ -158,7 +159,6 @@ namespace ScreenSaverApp
                         }
                     }
                 }
-                Thread.Sleep(100);
                 timerTransparent.Enabled = true;
                 timerTransparent.Start(); 
             }
@@ -166,6 +166,7 @@ namespace ScreenSaverApp
 
         private void timerTransparent_Tick(object sender, EventArgs e)
         {
+            timerTransparent.Interval = 200;
             if (counter <= 4)
             {
                 var c = lbls[counter].ForeColor;
@@ -277,6 +278,7 @@ namespace ScreenSaverApp
                     float fontSize = (float)Convert.ToDouble(str[2]);
                     fontSize = (Bounds.Width / 800) * fontSize; //12;
                     if (fontSize < 10) fontSize = 10;
+                    if (fontSize > 38) fontSize = 38;
 
                     font = new Font(str[1], fontSize,
                         str[0] == "False" ? FontStyle.Regular : FontStyle.Bold);
@@ -297,6 +299,18 @@ namespace ScreenSaverApp
                 {
                     //MessageBox.Show(ex.Message);
                 }
+            }
+            else
+            {
+                ForeColor = label1.ForeColor;
+                //float fontSize = (float)Convert.ToDouble(label1.Font.Size);
+                float fontSize = (float)Convert.ToDouble(((0.01 * this.Width) + 12));
+                fontSize = (Bounds.Width / 800) * fontSize;
+                if (fontSize < 10) fontSize = 10;
+                if (fontSize > 38) fontSize = 38;
+
+
+                font = new Font(label1.Font.Name, fontSize, label1.Font.Style);
             }
         }
 
