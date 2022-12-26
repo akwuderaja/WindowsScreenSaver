@@ -44,6 +44,8 @@
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnColor = new System.Windows.Forms.Button();
             this.btnFont = new System.Windows.Forms.Button();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             this.fontDialog1 = new System.Windows.Forms.FontDialog();
             this.groupBox1.SuspendLayout();
@@ -197,9 +199,11 @@
             // 
             this.groupBox2.Controls.Add(this.btnColor);
             this.groupBox2.Controls.Add(this.btnFont);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.label6);
             this.groupBox2.Location = new System.Drawing.Point(312, 27);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(303, 279);
+            this.groupBox2.Size = new System.Drawing.Size(375, 279);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             // 
@@ -208,9 +212,9 @@
             this.btnColor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(104)))));
             this.btnColor.Font = new System.Drawing.Font("Arial", 18F);
             this.btnColor.ForeColor = System.Drawing.Color.White;
-            this.btnColor.Location = new System.Drawing.Point(6, 77);
+            this.btnColor.Location = new System.Drawing.Point(6, 149);
             this.btnColor.Name = "btnColor";
-            this.btnColor.Size = new System.Drawing.Size(291, 49);
+            this.btnColor.Size = new System.Drawing.Size(347, 49);
             this.btnColor.TabIndex = 1;
             this.btnColor.Text = "Click To Select";
             this.btnColor.UseVisualStyleBackColor = false;
@@ -219,18 +223,42 @@
             // btnFont
             // 
             this.btnFont.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(18)))), ((int)(((byte)(32)))), ((int)(((byte)(104)))));
-            this.btnFont.Font = new System.Drawing.Font("Arial", 18F);
+            this.btnFont.Font = new System.Drawing.Font("Arial", 20F);
             this.btnFont.ForeColor = System.Drawing.Color.White;
-            this.btnFont.Location = new System.Drawing.Point(6, 22);
+            this.btnFont.Location = new System.Drawing.Point(6, 35);
             this.btnFont.Name = "btnFont";
-            this.btnFont.Size = new System.Drawing.Size(291, 49);
+            this.btnFont.Size = new System.Drawing.Size(347, 75);
             this.btnFont.TabIndex = 0;
             this.btnFont.Text = "Click To Select";
             this.btnFont.UseVisualStyleBackColor = false;
             this.btnFont.Click += new System.EventHandler(this.btnFont_Click);
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label7.Location = new System.Drawing.Point(6, 129);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(125, 17);
+            this.label7.TabIndex = 9;
+            this.label7.Text = "Background Color:";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.label6.Location = new System.Drawing.Point(6, 16);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(40, 17);
+            this.label6.TabIndex = 9;
+            this.label6.Text = "Font:";
+            // 
             // fontDialog1
             // 
+            this.fontDialog1.Color = System.Drawing.Color.White;
+            this.fontDialog1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F);
+            this.fontDialog1.MaxSize = 36;
+            this.fontDialog1.MinSize = 10;
             this.fontDialog1.ShowColor = true;
             // 
             // frmSettings
@@ -239,7 +267,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(655, 359);
+            this.ClientSize = new System.Drawing.Size(712, 359);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnCancel);
@@ -251,6 +279,7 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -275,5 +304,7 @@
         private System.Windows.Forms.Button btnFont;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private System.Windows.Forms.FontDialog fontDialog1;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -1,0 +1,32 @@
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.exe
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.pdb
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csprojAssemblyReference.cache
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.frmScreenSaver.resources
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.Properties.Resources.resources
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.frmSettings.resources
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.GenerateResource.cache
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.CoreCompileInputs.cache
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.exe
+C:\Users\ChudiSoft\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.pdb
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.frmScreenSaver.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.Properties.Resources.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.frmSettings.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.GenerateResource.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.CoreCompileInputs.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.exe.config
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.exe
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\bin\Debug\ScreenSaverApp.pdb
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.exe
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.pdb
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp\obj\Debug\ScreenSaverApp.csproj.AssemblyReference.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\bin\Debug\ScreenSaverApp.exe.config
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\bin\Debug\ScreenSaverApp.exe
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\bin\Debug\ScreenSaverApp.pdb
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.csproj.AssemblyReference.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.frmScreenSaver.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.Properties.Resources.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.frmSettings.resources
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.csproj.GenerateResource.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.csproj.CoreCompileInputs.cache
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.exe
+C:\Users\akwud\source\repos\ScreenSaverApp\ScreenSaverApp12 - Copy\obj\Debug\ScreenSaverApp.pdb

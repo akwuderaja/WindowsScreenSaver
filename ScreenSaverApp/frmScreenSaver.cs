@@ -8,10 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using Microsoft.Win32;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Xml.Linq;
-using ScreenSaverApp.Properties;
-using System.Resources;
 using System.Threading;
 
 namespace ScreenSaverApp
@@ -37,11 +33,13 @@ namespace ScreenSaverApp
 
         private Point mouseLocation;
         private bool previewMode = false;
-        private Random rand = new Random();
         private int counter = 0, counterTrans = 0;
-        int A = 0, R = 0, G = 0, B = 0;
         Font font;
-        List<Label> lbls = new List<Label>();
+        List<PictureBox> pics = new List<PictureBox>();
+        PictureBox pic = new PictureBox();
+        List<string> txts = new List<string>();
+        Bitmap bmp = new Bitmap(10, 10);
+        private bool canPaint = false;
 
         public frmScreenSaver()
         {
@@ -71,23 +69,12 @@ namespace ScreenSaverApp
             Location = new Point(0, 0);
 
             // Make text smaller
-            Font ft = new System.Drawing.Font("Arial", 6);
-            label1.Font = ft;
-            label2.Font = ft;
-            label3.Font = ft;
-            label4.Font = ft;
-            label5.Font = ft;
-
-            label1.Location = new Point(this.Bounds.X + 2, this.Bounds.Y + 5);
-            label2.Location = new Point(this.Bounds.X + 80, label1.Location.Y + 23);
-            label3.Location = new Point(this.Bounds.X + 25, label2.Location.Y + 23);
-            label4.Location = new Point(this.Bounds.X + 80, label3.Location.Y + 23);
-            label5.Location = new Point(this.Bounds.X + 2, label4.Location.Y + 23);
+            font = new System.Drawing.Font("Arial", 6);
 
             pictureBox1.Size =
                 new Size(pictureBox1.Size.Width / 2, pictureBox1.Size.Height / 2);
-            panel1.Size =
-                new Size(panel1.Size.Width / 4, panel1.Size.Height);
+            pictureBox2.Size =
+                new Size(pictureBox2.Size.Width / 6, pictureBox2.Size.Height);
             pictureBox1.Location =
                 new Point(Size.Width - pictureBox1.Size.Width - 3,
                     Size.Height - pictureBox1.Size.Height - 3
@@ -97,164 +84,29 @@ namespace ScreenSaverApp
         }
 
         private void frmScreenSaver_Load(object sender, EventArgs e)
-        {            
+        {
+            txts.Add("People First");
+            txts.Add("Stronger Together");
+            txts.Add("Do what's right, not what's easy");
+            txts.Add("Always Deliver");
+            txts.Add("Be Authentic");
+
             LoadSettings();
 
-            Cursor.Hide();            
+            Cursor.Hide();
             TopMost = true;
+
+
+            pics.Add(pic1);
+            pics.Add(pic2);
+            pics.Add(pic3);
+            pics.Add(pic5);
+            pics.Add(pic4);
 
             moveTimer.Interval = 500;
             moveTimer.Tick += new EventHandler(moveTimer_Tick);
             moveTimer.Start();
 
-            lbls.Add(label1);
-            lbls.Add(label2);
-            lbls.Add(label3);
-            lbls.Add(label4);
-            lbls.Add(label5);
-        
-        }
-        void TransparetBackground(Control C)
-        {
-            C.Visible = false;
-
-            C.Refresh();
-            Application.DoEvents();
-
-            Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
-            int titleHeight = screenRectangle.Top - this.Top;
-            int Right = screenRectangle.Left - this.Left;
-
-            Bitmap bmp = new Bitmap(this.Width, this.Height);
-            this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
-            Bitmap bmpImage = new Bitmap(bmp);
-            bmp = bmpImage.Clone(new Rectangle(C.Location.X + Right, C.Location.Y + titleHeight, C.Width, C.Height), bmpImage.PixelFormat);
-            C.BackgroundImage = bmp;
-
-            //C.Visible = true;
-        }
-        private void moveTimer_Tick(object sender, System.EventArgs e)
-        {
-            // Move text to new location
-            if (counter <= 5 && timerTransparent.Enabled == false)
-            {
-                moveTimer.Interval = 3000;
-                timerTransparent.Interval = 1;
-                counterTrans = 0;
-                panel1.Visible = true;
-                if (counter==0)
-                {
-                    foreach (Control item in Controls)
-                    {
-                        if (typeof(Label) == item.GetType())
-                        {
-                            try
-                            {
-                                TransparetBackground(item);
-                                //item.Visible = false;
-                            }
-                            catch (Exception)
-                            {
-                            }
-                        }
-                    }
-                }
-                timerTransparent.Enabled = true;
-                timerTransparent.Start(); 
-            }
-        }
-
-        private void timerTransparent_Tick(object sender, EventArgs e)
-        {
-            timerTransparent.Interval = 200;
-            if (counter <= 4)
-            {
-                var c = lbls[counter].ForeColor;
-                if (counterTrans == 0)
-                {
-                    A = c.A;
-                    R = c.R;
-                    G = c.G;
-                    B = c.B;
-
-                    Color c2 = Color.FromArgb(A,
-                        (int)(R / 4), (int)(G / 4), (int)(B / 4));
-                    //(int)(c.R * 0.8), (int)(c.G * 0.8), (int)(c.B * 0.8));
-                    //lbls[counter].ForeColor = c2;
-                    lbls[counter].Font = new Font(font.Name, font.Size / 1.5f, font.Style);
-                    lbls[counter].Visible = true;
-                    counterTrans++;
-                }
-                else if (counterTrans == 1)
-                {
-                    Color c2 = Color.FromArgb(A,
-                        (int)(R / 3), (int)(G / 3), (int)(B / 3));
-                    lbls[counter].Font = new Font(font.Name, font.Size / 1.4f, font.Style);
-                    counterTrans++;
-                }
-                else if (counterTrans == 2)
-                {
-                    Color c2 = Color.FromArgb(A,
-                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
-                    lbls[counter].Font = new Font(font.Name, font.Size / 1.3f, font.Style);
-                    counterTrans++;
-                }
-                else if (counterTrans == 3)
-                {
-                    Color c2 = Color.FromArgb(A,
-                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
-                    lbls[counter].Font = new Font(font.Name, font.Size / 1.2f, font.Style);
-                    counterTrans++;
-                }
-                else if (counterTrans == 4)
-                {
-                    Color c2 = Color.FromArgb(A,
-                        (int)(R / 2), (int)(G / 2), (int)(B / 2));
-                    lbls[counter].Font = new Font(font.Name, font.Size / 1.1f, font.Style);
-                    counterTrans++;
-                }
-                else if (counterTrans == 5)
-                {
-                    lbls[counter].ForeColor = ForeColor;
-                    lbls[counter].Font = font;
-                    counterTrans = 0;
-                    counter++; 
-                }
-            }
-            else
-            {
-                float val = 0f;
-                if (counter == 5)
-                    val = 1.1f;
-                else if (counter == 6)
-                    val = 1.2f;
-                else if (counter == 7)
-                    val = 1.3f;
-                else if (counter == 8)
-                    val = 1.4f;
-                else if (counter == 9)
-                    val = 1.5f;
-                else if (counter == 10)
-                {
-                    counter = 0;
-                    label1.Visible = false;
-                    label2.Visible = false;
-                    label3.Visible = false;
-                    label4.Visible = false;
-                    label5.Visible = false;
-                    panel1.Visible = false;
-                    moveTimer.Interval = 500;
-                    timerTransparent.Stop();
-                    timerTransparent.Enabled = false;
-                    return;
-                }
-
-                foreach (Control item in Controls)
-                    if (typeof(Label) == item.GetType())
-                        item.Font = new Font(font.Name, font.Size / val, font.Style);
-
-                counter++;
-            }
         }
         private void LoadSettings()
         {
@@ -264,11 +116,12 @@ namespace ScreenSaverApp
             {
                 try
                 {
-                    label1.Text = (string)key.GetValue("text1");
-                    label2.Text = (string)key.GetValue("text2");
-                    label3.Text = (string)key.GetValue("text3");
-                    label4.Text = (string)key.GetValue("text4");
-                    label5.Text = (string)key.GetValue("text5");
+                    txts.Clear();
+                    txts.Add((string)key.GetValue("text1"));
+                    txts.Add((string)key.GetValue("text2"));
+                    txts.Add((string)key.GetValue("text3"));
+                    txts.Add((string)key.GetValue("text5"));
+                    txts.Add((string)key.GetValue("text4"));
 
                     ForeColor = Color.FromArgb(int.Parse(key.GetValue("FontColor").ToString()));
                     BackColor = Color.FromArgb(int.Parse(key.GetValue("BackColor").ToString()));
@@ -276,24 +129,14 @@ namespace ScreenSaverApp
 
 
                     float fontSize = (float)Convert.ToDouble(str[2]);
-                    fontSize = (Bounds.Width / 800) * fontSize; //12;
+                    fontSize = (float)Convert.ToDouble(((0.02 * this.Width) + fontSize));
+                    //fontSize = (Bounds.Width / 800) * fontSize; //12;
                     if (fontSize < 10) fontSize = 10;
-                    if (fontSize > 38) fontSize = 38;
+                    if (fontSize > 63) fontSize = 63;
 
                     font = new Font(str[1], fontSize,
                         str[0] == "False" ? FontStyle.Regular : FontStyle.Bold);
 
-                    label1.ForeColor = ForeColor;
-                    label2.ForeColor = ForeColor;
-                    label3.ForeColor = ForeColor;
-                    label4.ForeColor = ForeColor;
-                    label5.ForeColor = ForeColor;
-
-                    label1.Font = font;
-                    label2.Font = font;
-                    label3.Font = font;
-                    label4.Font = font;
-                    label5.Font = font;
                 }
                 catch (Exception)// ex)
                 {
@@ -302,18 +145,206 @@ namespace ScreenSaverApp
             }
             else
             {
-                ForeColor = label1.ForeColor;
-                //float fontSize = (float)Convert.ToDouble(label1.Font.Size);
-                float fontSize = (float)Convert.ToDouble(((0.01 * this.Width) + 12));
-                fontSize = (Bounds.Width / 800) * fontSize;
+                //Set default color
+                ForeColor = Color.White;
+                float fontSize = (float)Convert.ToDouble(((0.02 * this.Width) + 20));
+                //fontSize = (Bounds.Width / 800) * fontSize;
                 if (fontSize < 10) fontSize = 10;
-                if (fontSize > 38) fontSize = 38;
+                if (fontSize > 63) fontSize = 63;
 
 
-                font = new Font(label1.Font.Name, fontSize, label1.Font.Style);
+                font = new Font("Microsoft Sans Serif", fontSize, FontStyle.Regular);
             }
         }
 
+        private void pic_Paint(object sender, PaintEventArgs e)
+        {
+            if (counterTrans >= 4)
+            {
+                pic.Paint -= pic_Paint;
+            }
+            if (canPaint)
+            {
+                canPaint = false;
+                if (counter <= 4)
+                {
+                    string txt = txts[counter];
+                    float val = 1.9f;
+
+                    if (counterTrans == 0)
+                    {
+                    }
+                    else if (counterTrans == 1)
+                        val = 1.6f;
+                    else if (counterTrans == 2)
+                        val = 1.4f;
+                    else if (counterTrans == 3)
+                        val = 1.2f;
+                    else if (counterTrans == 4)
+                        val = 1.1f;
+                    else if (counterTrans == 5)
+                        val = font.Size;
+
+                    Font ft = new Font(font.Name, Convert.ToInt32(
+                            Math.Round((font.Size / val), 2)), font.Style);
+                    SizeF size = e.Graphics.MeasureString(txt, ft);
+
+                    int pointX = 0;
+                    if (counter == 1 || counter == 3)
+                        pointX = pic.Width - ((int)(size.Width + 10));
+                    else if (counter == 2)
+                        pointX = (pic.Width / 2) - ((int)(size.Width / 2));
+
+
+                    e.Graphics.DrawString(txt, ft, new SolidBrush(ForeColor),
+                        pointX, 0);
+                }
+            }
+        }
+
+        void TransparetBackground(Control C)
+        {
+            if (previewMode) return;
+            try
+            {
+                C.Visible = false;
+
+                C.Refresh();
+                Application.DoEvents();
+                if (this.IsDisposed)
+                {
+                    return;
+                }
+                Rectangle screenRectangle = RectangleToScreen(this.ClientRectangle);
+                int titleHeight = screenRectangle.Top - this.Top;
+                int Right = screenRectangle.Left - this.Left;
+
+                Bitmap bmp = new Bitmap(this.Width, this.Height);
+                this.DrawToBitmap(bmp, new Rectangle(0, 0, this.Width, this.Height));
+                Bitmap bmpImage = new Bitmap(bmp);
+                bmp = bmpImage.Clone(new Rectangle(C.Location.X + Right, C.Location.Y + titleHeight, C.Width, C.Height), bmpImage.PixelFormat);
+                C.BackgroundImage = bmp;
+
+                C.Visible = true;
+            }
+            catch (Exception)
+            {
+            }
+        }
+        private void moveTimer_Tick(object sender, System.EventArgs e)
+        {
+            // Move text to new location
+            if (counter <= 5 && timerTransparent.Enabled == false)
+            {
+                moveTimer.Interval = 3000;
+                timerTransparent.Interval = 1;
+                counterTrans = 0;
+                pictureBox2.Visible = true;
+                if (counter == 0)
+                {
+                    foreach (var item in pics)
+                    {
+                        TransparetBackground(item);
+                    }
+                }
+                timerTransparent.Enabled = true;
+                timerTransparent.Start();
+            }
+        }
+
+        private void timerTransparent_Tick(object sender, EventArgs e)
+        {
+            timerTransparent.Interval = 200;
+            canPaint = true;
+            if (counter <= 4 && counterTrans <= 5)
+            {
+                if (counterTrans == 0)
+                {
+                    pic = pics[counter];
+                }
+                pic.Refresh();
+                if (counterTrans == 0)
+                {
+                    pic.Paint += pic_Paint;
+                }
+                this.InvokePaint(pic, new PaintEventArgs(pic.CreateGraphics(), pic.DisplayRectangle));
+                counterTrans++;
+                if (counterTrans == 5)
+                {
+                    counter++;
+                    counterTrans = 0;
+                }
+            }
+            else if (counter < 10)
+            {
+                Graphics g1 = pic1.CreateGraphics();
+                Graphics g2 = pic2.CreateGraphics();
+                Graphics g3 = pic3.CreateGraphics();
+                Graphics g4 = pic4.CreateGraphics();
+                Graphics g5 = pic5.CreateGraphics();
+
+                float val = 0f;
+                if (counter == 5)
+                    val = 1.1f;
+                else if (counter == 6)
+                    val = 1.2f;
+                else if (counter == 7)
+                    val = 1.4f;
+                else if (counter == 8)
+                    val = 1.6f;
+                else if (counter == 9)
+                    val = 1.9f;
+                //val = 1.0f;
+                Font ft = new Font(font.Name, Convert.ToInt32(
+                        Math.Round((font.Size / val), 2)), font.Style);
+
+                SizeF s1 = g1.MeasureString(txts[0], ft);
+                SizeF s2 = g2.MeasureString(txts[1], ft);
+                SizeF s3 = g3.MeasureString(txts[2], ft);
+                SizeF s4 = g4.MeasureString(txts[4], ft);
+                SizeF s5 = g5.MeasureString(txts[3], ft);
+
+
+                int pointX2 = pics[1].Width - ((int)(s2.Width + 10));
+                int pointX5 = pics[4].Width - ((int)(s5.Width + 10));
+                int pointX3 = (pics[2].Width / 2) - ((int)(s3.Width / 2));
+
+
+                pics[0].Refresh();
+                pics[1].Refresh();
+                pics[2].Refresh();
+                pics[3].Refresh();
+                pics[4].Refresh();
+
+                g1.DrawString(txts[0], ft, new SolidBrush(ForeColor),
+                    0, 0);
+                g2.DrawString(txts[1], ft, new SolidBrush(ForeColor),
+                    pointX2, 0);
+                g3.DrawString(txts[2], ft, new SolidBrush(ForeColor),
+                    pointX3, 0);
+                g4.DrawString(txts[4], ft, new SolidBrush(ForeColor),
+                    0, 0);
+                g5.DrawString(txts[3], ft, new SolidBrush(ForeColor),
+                    pointX5, 0);
+
+                counter++;
+            }
+            else if (counter == 10)
+            {
+                counter = 0;
+                pic1.Visible = false;
+                pic2.Visible = false;
+                pic3.Visible = false;
+                pic4.Visible = false;
+                pic5.Visible = false;
+                pictureBox2.Visible = false;
+                moveTimer.Interval = 500;
+                timerTransparent.Stop();
+                timerTransparent.Enabled = false;
+                return;
+            }
+        }
+        
         private void frmScreenSaver_MouseMove(object sender, MouseEventArgs e)
         {
             if (!previewMode)
@@ -342,21 +373,6 @@ namespace ScreenSaverApp
             if (!previewMode)
                 Application.Exit();
         }
-
-        //private int _lastFormSize;
-        private void frmScreenSaver_SizeChanged(object sender, EventArgs e)
-        {
-            //var bigger = GetArea(this.Size) > _lastFormSize;
-            //float scaleFactor = bigger ? 1.1f : 0.9f;
-            //label1.Font = new Font(label1.Font.FontFamily.Name, label1.Font.Size * scaleFactor);
-
-            //_lastFormSize = GetArea(this.Size);
-        }
-
-
-        //private int GetArea(Size size)
-        //{
-        //    return size.Height * size.Width;
-        //}
+        
     }
 }
